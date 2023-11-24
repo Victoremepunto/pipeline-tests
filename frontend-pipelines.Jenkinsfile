@@ -1,12 +1,11 @@
 
 pipeline {
-    agent none
+    agent any
     options {
         timestamps()
     }
     environment {
       CICD_URL="https://raw.githubusercontent.com/RedHatInsights/cicd-tools/main"
-      IMAGE="${APP_IMAGE}"
     }
 
     stages {
@@ -20,7 +19,6 @@ pipeline {
                 checkout scmGit(
                     branches: [[name: '$ghprbSourceBranch']],
                     userRemoteConfigs: [[url: '$ghprbAuthorRepoGitUrl']])
-
 //                stash(name: 'project-files', includes: "**")
             }
         }
